@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    List<Post> findAllByUsersOOrderByCreatedDateDesc(Users users);
+    List<Post> findAllByUsersOrderByCreatedDateDesc(Users users);
 
     List<Post> findAllByOrderByCreatedDateDesc();
 
