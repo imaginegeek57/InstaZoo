@@ -1,5 +1,6 @@
 package com.instazoo.app.service;
 
+import com.instazoo.app.dto.UserDTO;
 import com.instazoo.app.entity.Users;
 import com.instazoo.app.entity.enums.ERole;
 import com.instazoo.app.exception.UserExistException;
@@ -8,8 +9,10 @@ import com.instazoo.app.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.security.Principal;
 
 @Service
 public class UserService {
@@ -41,4 +44,24 @@ public class UserService {
             throw new UserExistException("The user " + user.getName() + "already exist. Please check credentials");
         }
     }
+
+    public Users UpdateUser(UserDTO userDTO, Principal principal) {
+        Users users = getUserByPrincipal(principal);
+        users.setName(userDTO.getFirstname());
+        users.setLastname(userDTO.getLastname());
+        users.setBio(userDTO.getBio());
+
+        return userRepository.save(users);
+    }
+
+    public Users getCurrentUser(Principal principal) {
+        return getUserByPrincipal(principal);
+    }
+
+    private Users getUserByPrincipal(Principal principal) {
+        String username = principal.getName();
+        return userRepository.findUsersByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found with username: " + username));
+    }
+
 }
