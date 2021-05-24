@@ -45,7 +45,7 @@ public class UserService {
         }
     }
 
-    public Users UpdateUser(UserDTO userDTO, Principal principal) {
+    public Users updateUser(UserDTO userDTO, Principal principal) {
         Users users = getUserByPrincipal(principal);
         users.setName(userDTO.getFirstname());
         users.setLastname(userDTO.getLastname());
@@ -64,4 +64,7 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found with username: " + username));
     }
 
+    public Users getUserById(long id) {
+        return userRepository.findUsersById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
 }
