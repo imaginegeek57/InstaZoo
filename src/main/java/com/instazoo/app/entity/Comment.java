@@ -25,4 +25,5 @@ public class Comment {
     @PrePersist
     protected void onCreate() {
         createdDate = LocalDateTime.now();
-    }}
+    }
+}

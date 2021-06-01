@@ -1,7 +1,6 @@
 package com.instazoo.app.payload.request;
 
 import lombok.Data;
-import lombok.NonNull;
 
 import javax.validation.constraints.NotEmpty;
 

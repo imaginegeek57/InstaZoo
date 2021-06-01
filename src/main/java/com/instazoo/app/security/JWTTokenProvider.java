@@ -2,12 +2,10 @@ package com.instazoo.app.security;
 
 import com.instazoo.app.entity.Users;
 import io.jsonwebtoken.*;
-import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,13 +63,6 @@ public class JWTTokenProvider {
         return Long.parseLong(id);
 
     }
-
-
-
-
-
-
-
 
 
 }

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -30,7 +31,7 @@ public class PostController {
     @Autowired
     private ResponseErrorValidation responseErrorValidation;
 
-    @PostMapping("/post")
+    @PostMapping("/create")
     public ResponseEntity<Object> createPost(@Valid @RequestBody PostDTO postDTO,
                                              BindingResult bindingResult,
                                              Principal principal) {
@@ -53,10 +54,16 @@ public class PostController {
 
         return new ResponseEntity<>(postDTOList, HttpStatus.OK);
     }
-//      TODO: postService.getAllPostsForUser
-//    public ResponseEntity<List<PostDTO>> getAllPostsForUser(Principal principal) {
-//        List<PostDTO> postDTOList = postService.get()
-//    }
+
+    @GetMapping("/user/posts")
+    public ResponseEntity<List<PostDTO>> getAllPostsForUser(Principal principal) {
+        List<PostDTO> postDTOList = postService.getAllPostForUser(principal)
+                .stream()
+                .map(postFacade::postToPostDTO)
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(postDTOList, HttpStatus.OK);
+    }
 
     @PostMapping("/{postId}/{username}/like")
     public ResponseEntity<PostDTO> likePost(@PathVariable("postId") String postId,

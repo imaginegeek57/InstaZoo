@@ -1,7 +1,7 @@
 package com.instazoo.app.entity;
 
-import com.instazoo.app.entity.enums.ERole;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.instazoo.app.entity.enums.ERole;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +30,7 @@ public class Users implements UserDetails {
 
     @ElementCollection(targetClass = ERole.class)
     @CollectionTable(name = "user_role",
-    joinColumns = @JoinColumn(name = "user_id"))
+            joinColumns = @JoinColumn(name = "user_id"))
     private Set<ERole> role = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "users", orphanRemoval = true)
@@ -48,7 +48,8 @@ public class Users implements UserDetails {
     @Transient
     private Collection<? extends GrantedAuthority> authorities;
 
-    public Users() {}
+    public Users() {
+    }
 
     public Users(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -57,6 +58,7 @@ public class Users implements UserDetails {
         this.password = password;
         this.authorities = authorities;
     }
+
     /**
      * Security
      */

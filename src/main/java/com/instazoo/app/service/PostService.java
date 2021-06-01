@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -83,11 +82,14 @@ public class PostService {
         imageModel.ifPresent(imageRepository::delete);
     }
 
-
-
     private Users getUserByPrincipal(Principal principal) {
         String username = principal.getName();
         return userRepository.findUsersByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found with username: " + username));
+    }
+
+    public List<Post> getAllPostForUser(Principal principal) {
+        Users user = getUserByPrincipal(principal);
+        return postRepository.findAllByUsersOrderByCreatedDateDesc(user);
     }
 }

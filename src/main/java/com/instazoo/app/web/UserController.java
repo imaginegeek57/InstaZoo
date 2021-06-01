@@ -5,14 +5,12 @@ import com.instazoo.app.entity.Users;
 import com.instazoo.app.facade.UserFacade;
 import com.instazoo.app.service.UserService;
 import com.instazoo.app.validation.ResponseErrorValidation;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.security.Principal;
 

@@ -1,8 +1,6 @@
 package com.instazoo.app.annotation;
 
-import com.instazoo.app.validation.EmailValidator;
 import com.instazoo.app.validation.PasswordMatchesValidator;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
