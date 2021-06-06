@@ -1,7 +1,6 @@
 package com.instazoo.app.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -25,5 +24,8 @@ public class Comment {
     @PrePersist
     protected void onCreate() {
         createdDate = LocalDateTime.now();
+    }
+
+    public Comment() {
     }
 }

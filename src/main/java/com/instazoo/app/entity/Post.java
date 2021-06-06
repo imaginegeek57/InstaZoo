@@ -34,4 +34,7 @@ public class Post {
     protected void onCreate() {
         createdDate = LocalDateTime.now();
     }
+
+    public Post() {
+    }
 }
